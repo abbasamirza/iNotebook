@@ -2,6 +2,7 @@ import { React, useContext, useEffect } from "react";
 import NoteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 import "../styles/Notes.css";
+import HorizontalRule from "./HorizontalRule";
 
 const Notes = () => {
   const noteContext = useContext(NoteContext);
@@ -13,9 +14,9 @@ const Notes = () => {
   }, []);
 
   return (
-    <div className="row my-3">
+    <div className="row my-3 justify-content-center">
       <h1 className="text-center">Your Notes</h1>
-      <div className="pb-4 mb-1 border-bottom border-custom border-black"></div>
+      <HorizontalRule />
       {notes.map((note) => {
         return <NoteItem key={note._id} note={note} />;
       })}
