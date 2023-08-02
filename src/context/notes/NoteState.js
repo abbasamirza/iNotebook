@@ -1,78 +1,47 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import NoteContext from "./noteContext";
+import ApiContext from "../apiKey/apiContext";
 
 const NoteState = (props) => {
-  const notesInitial = [
-    {
-      _id: "64c89ec665675c4ca318c9cd",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name",
-      description: "Hello, my name is Abbas",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec965675c4ca318c9cf",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name Updated",
-      description: "Hello, my name is Abbas Ali Mirza",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec665675c4ca318c9cd",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name",
-      description: "Hello, my name is Abbas",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec965675c4ca318c9cf",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name Updated",
-      description: "Hello, my name is Abbas Ali Mirza",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec665675c4ca318c9cd",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name",
-      description: "Hello, my name is Abbas",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec965675c4ca318c9cf",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name Updated",
-      description: "Hello, my name is Abbas Ali Mirza",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec665675c4ca318c9cd",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name",
-      description: "Hello, my name is Abbas",
-      tag: "Personal",
-      __v: 0,
-    },
-    {
-      _id: "64c89ec965675c4ca318c9cf",
-      user: "64c75f1c3c868e8cf6397719",
-      title: "My Name Updated",
-      description: "Hello, my name is Abbas Ali Mirza",
-      tag: "Personal",
-      __v: 0,
-    },
-  ];
+  const [notes, setNotes] = useState([]);
+  const host = useContext(ApiContext);
 
-  const [notes, setNotes] = useState(notesInitial);
+  // Fetch all notes
+  const fetchAllNotes = async () => {
+    // API Call
+    try {
+      let allNotes = await fetch(`${host}notes/fetchallnotes`, {
+        method: "GET",
+        headers: {
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+        },
+      });
+      allNotes = await allNotes.json();
+      setNotes(allNotes);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  // Add a note
+  const addNote = async (title, description, tag) => {
+    // API Call
+    try {
+      await fetch(`${host}notes/addnote`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+        },
+      });
+      setNotes(notes.push());
+    } catch (error) {
+      console.error(error.message); 
+    }
+  }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes }}>
+    <NoteContext.Provider value={{ notes, setNotes, fetchAllNotes, addNote }}>
       {props.children}
     </NoteContext.Provider>
   );

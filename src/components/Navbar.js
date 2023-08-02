@@ -1,64 +1,43 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import "../styles/Navbar.css"
 
 const Navbar = () => {
   let location = useLocation();
 
   return (
-    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid my-1">
-        <Link className="navbar-brand" to="/">
-          iNotebook
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/" ? "active" : ""
-                }`}
-                aria-current="page"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
-                }`}
-                to="/about"
-              >
-                About Us
-              </Link>
-            </li>
-          </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+    <div className="l-navbar show" id="nav-bar">
+      <nav className="nav">
+        <div>
+          <Link to="/" className="nav_logo">
+            <i className="bx bx-layer nav_logo-icon"></i>
+            <span className="nav_logo-name">iNotebook</span>
+          </Link>
+          <div className="nav_list">
+            <Link to="/" className={`nav_link ${location.pathname === "/" ? "active" : ""}`}>
+              <i className="bx bx-grid-alt nav_icon"></i>
+              <span className="nav_name">View Notes</span>
+            </Link>
+            <Link to="/addnote" className={`nav_link ${location.pathname === "/addnote" ? "active" : ""}`}>
+              <i className="bx bx-grid-alt nav_icon"></i>
+              <span className="nav_name">Add a note</span>
+            </Link>
+            <Link to="/about" className={`nav_link ${location.pathname === "/about" ? "active" : ""}`}>
+              <i className="bx bx-user nav_icon"></i>
+              <span className="nav_name">About Us</span>
+            </Link>
+          </div>
         </div>
-      </div>
-    </nav>
+        <Link to="/login" className={`nav_link ${location.pathname === "/login" ? "active" : ""}`}>
+          <i className="bx bx-log-out nav_icon"></i>
+          <span className="nav_name">Logout</span>
+        </Link>
+        <Link to="/login" className={`nav_link ${location.pathname === "/login" ? "active" : ""}`}>
+          <i className="bx bx-log-out nav_icon"></i>
+          <span className="nav_name">Login</span>
+        </Link>
+      </nav>
+    </div>
   );
 };
 
