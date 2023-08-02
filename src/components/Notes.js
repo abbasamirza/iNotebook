@@ -17,7 +17,7 @@ const Notes = () => {
       <h1 className="text-center">Your Notes</h1>
       <div className="pb-4 mb-1 border-bottom border-custom border-black"></div>
       {notes.map((note) => {
-        return <NoteItem note={note} />;
+        return <NoteItem key={note._id} note={note} />;
       })}
     </div>
   );
