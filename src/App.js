@@ -1,13 +1,9 @@
-import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
+import ApiState from "./context/apiKey/ApiState";
+import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import ApiState from "./context/apiKey/ApiState";
-import Addnote from "./components/Addnote";
-import EditNote from "./components/EditNote";
 
 function App() {
   return (
@@ -15,17 +11,11 @@ function App() {
       <ApiState>
         <NoteState>
           <Router>
-            <Navbar />
-            <div className="container">
-              <Routes>
-                <Route exact path="/" element={<Home />}></Route>
-                <Route exact path="/addnote" element={<Addnote />}></Route>
-                <Route exact path="/about" element={<About />}></Route>
-                <Route exact path="/login" element={<Login />}></Route>
-                <Route exact path="/signup" element={<Signup />}></Route>
-                <Route exact path="/note/edit" element={<EditNote />}></Route>
-              </Routes>
-            </div>
+            <Routes>
+              <Route exact path="/" element={<Home />}></Route>
+              <Route exact path="/login" element={<Login />}></Route>
+              <Route exact path="/signup" element={<Signup />}></Route>
+            </Routes>
           </Router>
         </NoteState>
       </ApiState>

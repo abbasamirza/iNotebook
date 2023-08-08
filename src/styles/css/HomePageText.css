@@ -1,0 +1,55 @@
+.container {
+    min-height: calc(100vh - 7vh - 84px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 5em;
+    animation: slideMain 0.5s ease-in-out;
+}
+
+.heading-text {
+    font-size: 56px;
+}
+
+.slogan {
+    font-size: 24px;
+}
+
+a {
+    display: inline-flex;
+}
+
+.btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 9px;
+    margin: 0px 10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #ccc9c9;
+}
+
+@keyframes slideMain {
+    0% {
+        min-height: calc(100vh - 7vh - 168px);
+    }
+
+    25% {
+        min-height: calc(100vh - 7vh - 147px);
+    }
+
+    50% {
+        min-height: calc(100vh - 7vh - 126px);
+    }
+
+    75% {
+        min-height: calc(100vh - 7vh - 105px);
+    }
+
+    100% {
+        min-height: calc(100vh - 7vh - 84px);
+    }
+}

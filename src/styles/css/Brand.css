@@ -1,0 +1,17 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 45px;
+  padding: 20px 6px 15px 15px;
+}
