@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ApiState from "./context/apiKey/ApiState";
 import Addnote from "./components/Addnote";
+import EditNote from "./components/EditNote";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                 <Route exact path="/about" element={<About />}></Route>
                 <Route exact path="/login" element={<Login />}></Route>
                 <Route exact path="/signup" element={<Signup />}></Route>
+                <Route exact path="/note/edit" element={<EditNote />}></Route>
               </Routes>
             </div>
           </Router>

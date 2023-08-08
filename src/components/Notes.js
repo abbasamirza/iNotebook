@@ -7,6 +7,9 @@ import HorizontalRule from "./HorizontalRule";
 const Notes = () => {
   const noteContext = useContext(NoteContext);
   const { notes, fetchAllNotes } = noteContext;
+  const handleNoteEdit = (note) => {
+    console.log("Edit note");
+  }
 
   useEffect(() => {
     fetchAllNotes();
@@ -18,7 +21,7 @@ const Notes = () => {
       <h1 className="text-center">Your Notes</h1>
       <HorizontalRule />
       {notes.map((note) => {
-        return <NoteItem key={note._id} note={note} />;
+        return <NoteItem key={note._id} note={note} onEditClick={() => handleNoteEdit(note)} />;
       })}
     </div>
   );

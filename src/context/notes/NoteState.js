@@ -26,7 +26,6 @@ const NoteState = (props) => {
   // Add a note
   const addNote = async (title, description, tag) => {
     // API Call
-    console.log("Adding note");
     try {
       let noteToAdd = await fetch(`${host}notes/addnote`, {
         method: "POST",
@@ -46,9 +45,43 @@ const NoteState = (props) => {
       console.error(error.message); 
     }
   }
+  
+  // Update note
+  const updateNote = async (noteid, title, description, tag) => {
+    // API Call
+    try {
+      await fetch(`${host}notes/updatenote/${noteid}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+        },
+        body: JSON.stringify({
+          "title": title,
+          "description": description,
+          "tag": tag
+        }),
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+
+    // Update note in FrontEnd
+    for (let index = 0; index < notes.length; index++) {
+      const element = notes[index];
+      
+      if (element._id === noteid) {
+        notes[index].title = title;
+        notes[index].description = description;
+        notes[index].tag = tag;
+        break;
+      }
+    }
+    setNotes(notes);
+  }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, fetchAllNotes, addNote }}>
+    <NoteContext.Provider value={{ notes, setNotes, fetchAllNotes, addNote, updateNote }}>
       {props.children}
     </NoteContext.Provider>
   );
