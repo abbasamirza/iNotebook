@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import "../styles/css/Sidenav.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notes from "./Notes";
 
 const Sidenav = () => {
   const [showPopUp, setShowPopUp] = useState({ logout: false, addnote: false });
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/");
+  };
 
   return (
     <>
@@ -14,6 +20,7 @@ const Sidenav = () => {
             className="button"
             onMouseOver={() => setShowPopUp({ logout: true })}
             onMouseOut={() => setShowPopUp({ logout: false })}
+            onClick={handleLogout}
           >
             <i className="fa-solid fa-right-from-bracket"></i>
             {showPopUp.logout && <span className="popup">Logout</span>}
@@ -35,7 +42,7 @@ const Sidenav = () => {
           </div>
         </div>
         <div className="notes">
-            <Notes />
+          <Notes />
         </div>
       </div>
     </>
