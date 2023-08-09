@@ -2,15 +2,27 @@ import React, { useContext } from "react";
 import Brand from "./Brand";
 import Footer from "./Footer";
 import AuthContext from "../context/authentication/authContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const authContext = useContext(AuthContext);
   const { checkLoginCredentials } = authContext;
+  const navigate = useNavigate();
 
-  const handleLoginSubmit = (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    checkLoginCredentials(event.target[0].value, event.target[1].value);
-  }
+    const json = await checkLoginCredentials(
+      event.target[0].value,
+      event.target[1].value
+    );
+    if (json.success) {
+      localStorage.setItem("authToken", json.authToken);
+      navigate("/main");
+    }
+    else {
+      alert(json.error);
+    }
+  };
 
   return (
     <>
@@ -36,7 +48,9 @@ const Login = () => {
               required
               autoComplete="current-password"
             />
-            <button className="btn" type="submit">Login</button>
+            <button className="btn" type="submit">
+              Login
+            </button>
           </div>
         </form>
       </main>
