@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Sidenav from "./Sidenav";
 
 const Main = () => {
   return (
-    <div>Main</div>
-  )
-}
+    <>
+      <Sidenav />
+    </>
+  );
+};
 
-export default Main
+export default Main;
