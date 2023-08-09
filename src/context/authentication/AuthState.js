@@ -1,11 +1,9 @@
 import { useContext } from "react";
 import AuthContext from "./authContext"
 import ApiContext from "../apiKey/apiContext";
-import { useNavigate } from "react-router-dom";
 
 const AuthState = (props) => {
     const host = useContext(ApiContext);
-    const navigate = useNavigate();
 
     // Hit Login API
     const checkLoginCredentials = async (email, password) => {
@@ -21,10 +19,7 @@ const AuthState = (props) => {
                 }),
             });
             const json = await response.json();
-            if (json.success) {
-                localStorage.setItem("authToken", json.authToken);
-                navigate("/main");
-            }
+            return json;
         } catch (error) {
             console.error(error.message);
         }
