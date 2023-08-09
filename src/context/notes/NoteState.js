@@ -13,7 +13,7 @@ const NoteState = (props) => {
       let allNotes = await fetch(`${host}notes/fetchallnotes`, {
         method: "GET",
         headers: {
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+          "auth-token": localStorage.getItem("authToken")
         },
       });
       allNotes = await allNotes.json();

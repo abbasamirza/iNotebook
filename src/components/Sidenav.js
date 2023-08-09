@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "../styles/css/Sidenav.css";
 import { Link } from "react-router-dom";
+import Notes from "./Notes";
 
 const Sidenav = () => {
   const [showPopUp, setShowPopUp] = useState({ logout: false, addnote: false });
 
   return (
     <>
-      <sidenav>
+      <div className="sidenav">
         <div className="header">
           <button
             className="button"
             onMouseOver={() => setShowPopUp({ logout: true })}
             onMouseOut={() => setShowPopUp({ logout: false })}
           >
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <i className="fa-solid fa-right-from-bracket"></i>
             {showPopUp.logout && <span className="popup">Logout</span>}
           </button>
           <div className="center-container">
@@ -27,16 +28,16 @@ const Sidenav = () => {
                 onMouseOver={() => setShowPopUp({ addnote: true })}
                 onMouseOut={() => setShowPopUp({ addnote: false })}
               >
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
                 {showPopUp.addnote && <span className="popup">Add Note</span>}
               </button>
             </Link>
           </div>
         </div>
         <div className="notes">
-            Notes here
+            <Notes />
         </div>
-      </sidenav>
+      </div>
     </>
   );
 };

@@ -1,16 +1,16 @@
-sidenav {
+.sidenav {
   display: flex;
   flex-direction: column;
   position: fixed;
   height: 100vh;
   width: 441px;
   border-right: 1px solid #505050;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .header {
   display: flex;
-  background-color: green;
+  /* background-color: green; */
   height: 5vh;
   width: 100%;
   align-items: center;
@@ -38,8 +38,7 @@ sidenav {
   position: relative;
 }
 
-.button:hover,
-.button:focus {
+.button:hover {
   background-color: transparent;
 }
 
@@ -70,8 +69,4 @@ sidenav {
 .heading {
   font-weight: 600;
   font-size: 18px;
-}
-
-.notes {
-    background-color: blue;
 }
