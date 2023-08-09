@@ -1,0 +1,13 @@
+.noteitem {
+    padding: 15px 21px;
+    line-height: 1.6em;
+    cursor: pointer;
+}
+
+.noteitem-inactive:hover {
+    background-color: #424242;
+}
+
+.noteitem-active {
+    background-color: #003f86;
+}
