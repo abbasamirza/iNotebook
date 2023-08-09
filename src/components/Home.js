@@ -2,6 +2,7 @@ import React from "react";
 import Brand from "./Brand";
 import HomePageText from "./HomePageText";
 import Footer from "./Footer";
+import "../styles/css/Utils.css";
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
       <header>
         <Brand />
       </header>
-      <div className="main">
+      <div className="main-height fa-center">
         <HomePageText />
       </div>
       <footer>

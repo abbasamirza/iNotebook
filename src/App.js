@@ -4,21 +4,26 @@ import ApiState from "./context/apiKey/ApiState";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import AuthState from "./context/authentication/AuthState";
+import Main from "./components/Main";
 
 function App() {
   return (
     <>
-      <ApiState>
-        <NoteState>
-          <Router>
-            <Routes>
-              <Route exact path="/" element={<Home />}></Route>
-              <Route exact path="/login" element={<Login />}></Route>
-              <Route exact path="/signup" element={<Signup />}></Route>
-            </Routes>
-          </Router>
-        </NoteState>
-      </ApiState>
+      <Router>
+        <ApiState>
+          <AuthState>
+            <NoteState>
+              <Routes>
+                <Route exact path="/" element={<Home />}></Route>
+                <Route exact path="/login" element={<Login />}></Route>
+                <Route exact path="/signup" element={<Signup />}></Route>
+                <Route exact path="/main" element={<Main />}></Route>
+              </Routes>
+            </NoteState>
+          </AuthState>
+        </ApiState>
+      </Router>
     </>
   );
 }
