@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../styles/css/Sidenav.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Notes from "./Notes";
 import NoteContext from "../context/notes/noteContext";
 
