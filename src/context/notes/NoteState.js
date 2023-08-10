@@ -13,7 +13,7 @@ const NoteState = (props) => {
       let allNotes = await fetch(`${host}notes/fetchallnotes`, {
         method: "GET",
         headers: {
-          "auth-token": localStorage.getItem("authToken")
+          "auth-token": localStorage.getItem("authToken"),
         },
       });
       allNotes = await allNotes.json();
@@ -21,7 +21,7 @@ const NoteState = (props) => {
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
 
   // Add a note
   const addNote = async (title, description, tag) => {
@@ -31,21 +31,21 @@ const NoteState = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+          "auth-token": localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          "title": title,
-          "description": description,
-          "tag": tag
+          title: title,
+          description: description,
+          tag: tag,
         }),
       });
       noteToAdd = await noteToAdd.json();
       setNotes((notes) => [...notes, noteToAdd]);
     } catch (error) {
-      console.error(error.message); 
+      console.error(error.message);
     }
-  }
-  
+  };
+
   // Update note
   const updateNote = async (noteid, title, description, tag) => {
     // API Call
@@ -54,12 +54,12 @@ const NoteState = (props) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjNzVmMWMzYzg2OGU4Y2Y2Mzk3NzE5In0sImlhdCI6MTY5MDc4NzYxMn0.hDicBIX2pqHU2FTBRM5PJ8WIE8qH8xBp4A10dkf8hKY"
+          "auth-token": localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          "title": title,
-          "description": description,
-          "tag": tag
+          title: title,
+          description: description,
+          tag: tag,
         }),
       });
     } catch (error) {
@@ -69,7 +69,7 @@ const NoteState = (props) => {
     // Update note in FrontEnd
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
-      
+
       if (element._id === noteid) {
         notes[index].title = title;
         notes[index].description = description;
@@ -78,10 +78,41 @@ const NoteState = (props) => {
       }
     }
     setNotes(notes);
-  }
+  };
+
+  // Delete note
+  const deleteNote = async (noteid) => {
+    // API Call
+    try {
+      await fetch(`${host}notes/deletenote/${noteid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("authToken"),
+        },
+      });
+
+      setNotes(
+        notes.filter((note) => {
+          return note._id !== noteid;
+        })
+      );
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, fetchAllNotes, addNote, updateNote }}>
+    <NoteContext.Provider
+      value={{
+        notes,
+        setNotes,
+        fetchAllNotes,
+        addNote,
+        updateNote,
+        deleteNote,
+      }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
