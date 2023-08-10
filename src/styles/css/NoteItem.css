@@ -1,13 +1,31 @@
 .noteitem {
-    padding: 15px 21px;
-    line-height: 1.6em;
-    cursor: pointer;
+  padding: 15px 21px;
+  line-height: 1.6em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .noteitem-inactive:hover {
-    background-color: #424242;
+  background-color: #424242;
 }
 
 .noteitem-active {
-    background-color: #003f86;
+  background-color: #003f86;
+}
+
+.btn-trash {
+  background-color: transparent;
+  color: #a0a0a0;
+  border: none;
+  font-size: 15px;
+  position: absolute;
+  cursor: pointer;
+  top: 40%;
+  right: 15px;
+}
+
+.btn-trash:hover {
+  transform: scale(1.5);
 }

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/css/Sidenav.css";
 import { Link, useNavigate } from "react-router-dom";
 import Notes from "./Notes";
+import NoteContext from "../context/notes/noteContext";
 
 const Sidenav = () => {
   const [showPopUp, setShowPopUp] = useState({ logout: false, addnote: false });
   const navigate = useNavigate();
+  const noteContext = useContext(NoteContext);
+  const { addNote } = noteContext;
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -29,16 +32,15 @@ const Sidenav = () => {
             <p className="heading">All Notes</p>
           </div>
           <div className="right-container">
-            <Link to="/addnote">
-              <button
-                className="button"
-                onMouseOver={() => setShowPopUp({ addnote: true })}
-                onMouseOut={() => setShowPopUp({ addnote: false })}
-              >
-                <i className="fa-solid fa-plus"></i>
-                {showPopUp.addnote && <span className="popup">Add Note</span>}
-              </button>
-            </Link>
+            <button
+              className="button"
+              onMouseOver={() => setShowPopUp({ addnote: true })}
+              onMouseOut={() => setShowPopUp({ addnote: false })}
+              onClick={() => addNote("New Note", "Enter Description Here", "Default")}
+            >
+              <i className="fa-solid fa-plus"></i>
+              {showPopUp.addnote && <span className="popup">Add Note</span>}
+            </button>
           </div>
         </div>
         <div className="notes">
