@@ -4,6 +4,7 @@ import ApiContext from "../apiKey/apiContext";
 
 const NoteState = (props) => {
   const [notes, setNotes] = useState([]);
+  const [activeNoteId, setActiveNoteId] = useState(null);
   const host = useContext(ApiContext);
 
   // Fetch all notes
@@ -111,6 +112,8 @@ const NoteState = (props) => {
         addNote,
         updateNote,
         deleteNote,
+        activeNoteId,
+        setActiveNoteId
       }}
     >
       {props.children}

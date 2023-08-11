@@ -16,10 +16,10 @@ const NoteItem = (props) => {
       onMouseOut={() => setShowDelete(false)}
     >
       <div className="title">
-        <h4>{note.title}</h4>
+        <h4>{note.title.length > 40 ? note.title.substring(0, 40) + "..." : note.title}</h4>
       </div>
       <div className="description">
-        <p>{note.description}</p>
+        <p>{note.description.length > 49 ? note.description.substring(0, 49) + "..." : note.description}</p>
       </div>
       <button className="btn-trash">
         {showDelete && <i className="fa-solid fa-trash" onClick={() => {deleteNote(note._id)}}></i>}

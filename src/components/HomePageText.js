@@ -4,7 +4,7 @@ import "../styles/css/HomePageText.css";
 
 const HomePageText = () => {
   return (
-    <div className="container">
+    <div className="container-home">
       <div className="heading">
         <h1 className="heading-text">The simplest way to keep notes</h1>
       </div>

@@ -1,0 +1,12 @@
+.top-nav {
+    display: flex;
+    position: fixed;
+    width: calc(100vw - 441px);
+    height: 5vh;
+    margin-left: 441px;
+    z-index: 1;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0px;
+    border-bottom: 1px solid #505050;
+}
