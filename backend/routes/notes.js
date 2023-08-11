@@ -25,7 +25,7 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
 router.post(
   "/addnote",
   fetchuser,
-  [body("description", "Note cannot be empty").exists()],
+  [body("title", "Title max characters limit is 79").isLength({ max: 79 })],
   async (req, res) => {
     // If any data is invalid, return bad request
     const errors = validationResult(req);
@@ -54,7 +54,7 @@ router.post(
 router.put(
   "/updatenote/:id",
   fetchuser,
-  [body("description", "Note cannot be empty").exists()],
+  [body("title", "Title max characters limit is 79").isLength({ max: 79 })],
   async (req, res) => {
     // If any data is invalid, return bad request
     const errors = validationResult(req);

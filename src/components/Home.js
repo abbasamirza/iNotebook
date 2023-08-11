@@ -15,7 +15,6 @@ const Home = () => {
     // eslint-disable-next-line
   }, [])
   
-
   return (
     <>
       <header>

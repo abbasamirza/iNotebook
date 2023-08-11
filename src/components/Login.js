@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Brand from "./Brand";
 import Footer from "./Footer";
 import AuthContext from "../context/authentication/authContext";
@@ -23,6 +23,13 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/main");
+    }
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <>
       <header>
@@ -30,7 +37,7 @@ const Login = () => {
       </header>
       <main className="main-height">
         <form onSubmit={handleLoginSubmit}>
-          <div className="container">
+          <div className="container-main-form">
             <label htmlFor="email">Email</label>
             <input
               type="email"
