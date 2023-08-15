@@ -24,6 +24,11 @@
   left: 41%;
 }
 
+.center-container-2 {
+  position: absolute;
+  left: 36%;
+}
+
 .right-container {
   position: absolute;
   right: 0%;

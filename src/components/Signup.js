@@ -33,24 +33,27 @@ const Signup = () => {
       </header>
       <main className="main-height">
         <form onSubmit={handleSignupSubmit}>
-          <div className="container">
-            <label htmlFor="name">Name</label>
+          <div className="container-main-form">
+            <label className="label" htmlFor="name">Name</label>
             <input
+              className="input"
               type="text"
               placeholder="Enter Your Name"
               name="name"
               required
             />
-            <label htmlFor="email">Email</label>
+            <label className="label" htmlFor="email">Email</label>
             <input
+              className="input"
               type="email"
               placeholder="Enter Email"
               name="email"
               required
               autoComplete="username"
             />
-            <label htmlFor="password">Password</label>
+            <label className="label" htmlFor="password">Password</label>
             <input
+              className="input"
               type="password"
               placeholder="Enter Password"
               name="password"

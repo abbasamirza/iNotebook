@@ -3,6 +3,7 @@ import Brand from "./Brand";
 import Footer from "./Footer";
 import AuthContext from "../context/authentication/authContext";
 import { useNavigate } from "react-router-dom";
+import "../styles/css/Form.css";
 
 const Login = () => {
   const authContext = useContext(AuthContext);
@@ -38,16 +39,18 @@ const Login = () => {
       <main className="main-height">
         <form onSubmit={handleLoginSubmit}>
           <div className="container-main-form">
-            <label htmlFor="email">Email</label>
+            <label className="label" htmlFor="email">Email</label>
             <input
+              className="input"
               type="email"
               placeholder="Enter Email"
               name="email"
               required
               autoComplete="username"
             />
-            <label htmlFor="password">Password</label>
+            <label className="label" htmlFor="password">Password</label>
             <input
+              className="input"
               type="password"
               placeholder="Enter Password"
               name="password"

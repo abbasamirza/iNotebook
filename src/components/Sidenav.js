@@ -8,13 +8,13 @@ const Sidenav = () => {
   const [showPopUp, setShowPopUp] = useState({ logout: false, addnote: false });
   const navigate = useNavigate();
   const noteContext = useContext(NoteContext);
-  const { addNote } = noteContext;
+  const { notes, addNote } = noteContext;
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     navigate("/");
   };
-
+  
   return (
     <>
       <div className="sidenav">
@@ -28,8 +28,8 @@ const Sidenav = () => {
             <i className="fa-solid fa-right-from-bracket"></i>
             {showPopUp.logout && <span className="popup">Logout</span>}
           </button>
-          <div className="center-container">
-            <p className="heading">All Notes</p>
+          <div className={`center-container${notes.length === 0 ? "-2" : ""}`}>
+            <p className="heading">{notes.length === 0 ? "No Notes Found" : "All Notes"}</p>
           </div>
           <div className="right-container">
             <button
