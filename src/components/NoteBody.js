@@ -4,7 +4,7 @@ import NoteContext from "../context/notes/noteContext";
 
 const NoteBody = () => {
   const noteContext = useContext(NoteContext);
-  const { notes, activeNoteId, updateNote } = noteContext;
+  const { notes, activeNoteId, updateNote, notifyNoteUpdate } = noteContext;
   const [currentNote, setCurrentNote] = useState([]);
   const [debounceTimeout, setDebounceTimeout] = useState(null);
 
@@ -15,7 +15,7 @@ const NoteBody = () => {
       })
     );
     // eslint-disable-next-line
-  }, [activeNoteId, notes]);
+  }, [activeNoteId]);
 
   const handleTitleChange = (event) => {
     if (
@@ -49,6 +49,7 @@ const NoteBody = () => {
       currentNote[0].description,
       currentNote[0].tag
     );
+    notifyNoteUpdate();
   };
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const NoteBody = () => {
     }
 
     if (currentNote.length !== 0) {
-      setDebounceTimeout(setTimeout(updateBackend, 2000));
+      setDebounceTimeout(setTimeout(updateBackend, 1));
     }
     // eslint-disable-next-line
   }, [currentNote]);

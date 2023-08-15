@@ -14,7 +14,7 @@ const Sidenav = () => {
     localStorage.removeItem("authToken");
     navigate("/");
   };
-  
+
   return (
     <>
       <div className="sidenav">
@@ -29,14 +29,18 @@ const Sidenav = () => {
             {showPopUp.logout && <span className="popup">Logout</span>}
           </button>
           <div className={`center-container${notes.length === 0 ? "-2" : ""}`}>
-            <p className="heading">{notes.length === 0 ? "No Notes Found" : "All Notes"}</p>
+            <p className="heading">
+              {notes.length === 0 ? "No Notes Found" : "All Notes"}
+            </p>
           </div>
           <div className="right-container">
             <button
               className="button"
               onMouseOver={() => setShowPopUp({ addnote: true })}
               onMouseOut={() => setShowPopUp({ addnote: false })}
-              onClick={() => addNote("New Note", "Enter Description Here", "Default")}
+              onClick={() =>
+                addNote("New Note", "Enter Description Here", "Default")
+              }
             >
               <i className="fa-solid fa-plus"></i>
               {showPopUp.addnote && <span className="popup">Add Note</span>}
