@@ -103,6 +103,11 @@ const NoteState = (props) => {
     }
   };
 
+  // Callback function to notify Sidenav when a note is updated
+  const notifyNoteUpdate = () => {
+    fetchAllNotes();
+  }
+
   return (
     <NoteContext.Provider
       value={{
@@ -113,7 +118,8 @@ const NoteState = (props) => {
         updateNote,
         deleteNote,
         activeNoteId,
-        setActiveNoteId
+        setActiveNoteId,
+        notifyNoteUpdate
       }}
     >
       {props.children}
