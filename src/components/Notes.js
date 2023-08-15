@@ -5,7 +5,8 @@ import NoteItem from "./NoteItem";
 
 const Notes = () => {
   const noteContext = useContext(NoteContext);
-  const { notes, fetchAllNotes, activeNoteId, setActiveNoteId } = noteContext;
+  const { notes, fetchAllNotes, activeNoteId, setActiveNoteId } =
+    noteContext;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +21,14 @@ const Notes = () => {
   return (
     <div>
       {notes.map((note) => {
-        return <NoteItem key={note._id} note={note} onClick={() => setActiveNoteId(note._id)} active={note._id === activeNoteId} />;
+        return (
+          <NoteItem
+            key={note._id}
+            note={note}
+            onClick={() => setActiveNoteId(note._id)}
+            active={note._id === activeNoteId}
+          />
+        );
       })}
     </div>
   );
