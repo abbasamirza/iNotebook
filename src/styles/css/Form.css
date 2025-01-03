@@ -1,31 +1,32 @@
 .container-main-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 18vh - 84px);
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: calc(100vh - 18vh - 84px);
 }
 
 .label {
-    font-weight: bold;
-    font-size: 2em;
-    position: relative;
+  font-weight: 600;
+  font-size: 16px;
+  position: relative;
 }
 
 .input {
-    height: 4vh;
-    width: 15vw;
-    border: none;
-    border-radius: 6px;
-    padding: 1vh;
-    margin: 2vh 0;
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  border-color: #767676;
+  border: 1px solid #767676;
+  border-radius: 4px;
+  margin-top: 8px;
 }
 
 .input:focus {
-    outline: none;
+  outline: none;
 }
 
-.input::placeholder {
-    text-align: center;
+.input:hover {
+  border-color: #767676;
 }
