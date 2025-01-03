@@ -1,7 +1,7 @@
+import "../styles/css/Brand.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import noteImage from "../styles/img/note.png";
-import "../styles/css/Brand.css";
 
 const Brand = () => {
   return (

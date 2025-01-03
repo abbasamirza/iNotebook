@@ -1,9 +1,9 @@
+import "../styles/css/Form.css";
 import React, { useContext, useEffect } from "react";
 import Brand from "./Brand";
 import Footer from "./Footer";
 import AuthContext from "../context/authentication/authContext";
 import { useNavigate } from "react-router-dom";
-import "../styles/css/Form.css";
 
 const Login = () => {
   const authContext = useContext(AuthContext);
@@ -28,8 +28,7 @@ const Login = () => {
     if (localStorage.getItem("authToken")) {
       navigate("/main");
     }
-    // eslint-disable-next-line
-  }, [])
+  }, [navigate]);
 
   return (
     <>
@@ -39,7 +38,9 @@ const Login = () => {
       <main className="main-height">
         <form onSubmit={handleLoginSubmit}>
           <div className="container-main-form">
-            <label className="label" htmlFor="email">Email</label>
+            <label className="label" htmlFor="email">
+              Email
+            </label>
             <input
               className="input"
               type="email"
@@ -48,7 +49,9 @@ const Login = () => {
               required
               autoComplete="username"
             />
-            <label className="label" htmlFor="password">Password</label>
+            <label className="label" htmlFor="password">
+              Password
+            </label>
             <input
               className="input"
               type="password"

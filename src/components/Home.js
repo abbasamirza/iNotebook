@@ -1,8 +1,8 @@
+import "../styles/css/Utils.css";
 import React, { useEffect } from "react";
 import Brand from "./Brand";
 import HomePageText from "./HomePageText";
 import Footer from "./Footer";
-import "../styles/css/Utils.css";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -12,9 +12,8 @@ const Home = () => {
     if (localStorage.getItem("authToken")) {
       navigate("/main");
     }
-    // eslint-disable-next-line
-  }, [])
-  
+  }, [navigate]);
+
   return (
     <>
       <header>

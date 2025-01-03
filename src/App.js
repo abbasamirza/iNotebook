@@ -9,22 +9,20 @@ import Main from "./components/Main";
 
 function App() {
   return (
-    <>
-      <Router>
-        <ApiState>
-          <AuthState>
-            <NoteState>
-              <Routes>
-                <Route exact path="/" element={<Home />}></Route>
-                <Route exact path="/login" element={<Login />}></Route>
-                <Route exact path="/signup" element={<Signup />}></Route>
-                <Route exact path="/main" element={<Main />}></Route>
-              </Routes>
-            </NoteState>
-          </AuthState>
-        </ApiState>
-      </Router>
-    </>
+    <Router>
+      <ApiState>
+        <AuthState>
+          <NoteState>
+            <Routes>
+              <Route exact path="/" element={<Home />}></Route>
+              <Route exact path="/login" element={<Login />}></Route>
+              <Route exact path="/signup" element={<Signup />}></Route>
+              <Route exact path="/main" element={<Main />}></Route>
+            </Routes>
+          </NoteState>
+        </AuthState>
+      </ApiState>
+    </Router>
   );
 }
 

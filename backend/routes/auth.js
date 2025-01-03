@@ -4,11 +4,10 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const fetchuser = require("../middleware/fetchuser");
+const fetchUser = require("../middleware/fetchuser");
 
 // Create a secret for jsonWebToken
-// const JWT_SECRET = process.env.JSON_WEB_TOKEN_SECRET;
-const JWT_SECRET = "@bbasCodes";
+const JWT_SECRET = process.env.JSON_WEB_TOKEN_SECRET;
 
 // ROUTE 1: Create a User using: POST '/api/auth/createuser'. No login required
 router.post(
@@ -103,9 +102,9 @@ router.post(
 );
 
 // ROUTE 3: Get loggedin user details: POST '/api/auth/getuser'. Login required
-router.post("/getuser", fetchuser, async (req, res) => {
+router.post("/getuser", fetchUser, async (req, res) => {
   try {
-    userId = req.user.id;
+    const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
     res.send(user);
   } catch (error) {

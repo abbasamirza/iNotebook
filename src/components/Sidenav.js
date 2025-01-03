@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
 import "../styles/css/Sidenav.css";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Notes from "./Notes";
 import NoteContext from "../context/notes/noteContext";
 
 const Sidenav = () => {
-  const [showPopUp, setShowPopUp] = useState({ logout: false, addnote: false });
+  const [showPopUp, setShowPopUp] = useState({
+    logout: false,
+    addANote: false,
+  });
   const navigate = useNavigate();
   const noteContext = useContext(NoteContext);
   const { notes, addNote } = noteContext;
@@ -36,14 +39,14 @@ const Sidenav = () => {
           <div className="right-container">
             <button
               className="button"
-              onMouseOver={() => setShowPopUp({ addnote: true })}
-              onMouseOut={() => setShowPopUp({ addnote: false })}
+              onMouseOver={() => setShowPopUp({ addANote: true })}
+              onMouseOut={() => setShowPopUp({ addANote: false })}
               onClick={() =>
                 addNote("New Note", "Enter Description Here", "Default")
               }
             >
               <i className="fa-solid fa-plus"></i>
-              {showPopUp.addnote && <span className="popup">Add Note</span>}
+              {showPopUp.addANote && <span className="popup">Add Note</span>}
             </button>
           </div>
         </div>

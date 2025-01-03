@@ -34,7 +34,9 @@ const Signup = () => {
       <main className="main-height">
         <form onSubmit={handleSignupSubmit}>
           <div className="container-main-form">
-            <label className="label" htmlFor="name">Name</label>
+            <label className="label" htmlFor="name">
+              Name
+            </label>
             <input
               className="input"
               type="text"
@@ -42,7 +44,9 @@ const Signup = () => {
               name="name"
               required
             />
-            <label className="label" htmlFor="email">Email</label>
+            <label className="label" htmlFor="email">
+              Email
+            </label>
             <input
               className="input"
               type="email"
@@ -51,7 +55,9 @@ const Signup = () => {
               required
               autoComplete="username"
             />
-            <label className="label" htmlFor="password">Password</label>
+            <label className="label" htmlFor="password">
+              Password
+            </label>
             <input
               className="input"
               type="password"

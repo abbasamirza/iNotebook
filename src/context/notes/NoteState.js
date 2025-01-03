@@ -11,7 +11,7 @@ const NoteState = (props) => {
   const fetchAllNotes = async () => {
     // API Call
     try {
-      let allNotes = await fetch(`${host}notes/fetchallnotes`, {
+      let allNotes = await fetch(`${host}/api/notes/fetchallnotes`, {
         method: "GET",
         headers: {
           "auth-token": localStorage.getItem("authToken"),
@@ -28,16 +28,16 @@ const NoteState = (props) => {
   const addNote = async (title, description, tag) => {
     // API Call
     try {
-      let noteToAdd = await fetch(`${host}notes/addnote`, {
+      let noteToAdd = await fetch(`${host}/api/notes/addnote`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "auth-token": localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          title: title,
-          description: description,
-          tag: tag,
+          title,
+          description,
+          tag,
         }),
       });
       noteToAdd = await noteToAdd.json();
@@ -48,19 +48,19 @@ const NoteState = (props) => {
   };
 
   // Update note
-  const updateNote = async (noteid, title, description, tag) => {
+  const updateNote = async (noteId, title, description, tag) => {
     // API Call
     try {
-      await fetch(`${host}notes/updatenote/${noteid}`, {
+      await fetch(`${host}/api/notes/updatenote/${noteId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "auth-token": localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          title: title,
-          description: description,
-          tag: tag,
+          title,
+          description,
+          tag,
         }),
       });
     } catch (error) {
@@ -71,7 +71,7 @@ const NoteState = (props) => {
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
 
-      if (element._id === noteid) {
+      if (element._id === noteId) {
         notes[index].title = title;
         notes[index].description = description;
         notes[index].tag = tag;
@@ -82,10 +82,10 @@ const NoteState = (props) => {
   };
 
   // Delete note
-  const deleteNote = async (noteid) => {
+  const deleteNote = async (noteId) => {
     // API Call
     try {
-      await fetch(`${host}notes/deletenote/${noteid}`, {
+      await fetch(`${host}/api/notes/deletenote/${noteId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const NoteState = (props) => {
 
       setNotes(
         notes.filter((note) => {
-          return note._id !== noteid;
+          return note._id !== noteId;
         })
       );
     } catch (error) {
@@ -106,7 +106,7 @@ const NoteState = (props) => {
   // Callback function to notify Sidenav when a note is updated
   const notifyNoteUpdate = () => {
     fetchAllNotes();
-  }
+  };
 
   return (
     <NoteContext.Provider
@@ -119,7 +119,7 @@ const NoteState = (props) => {
         deleteNote,
         activeNoteId,
         setActiveNoteId,
-        notifyNoteUpdate
+        notifyNoteUpdate,
       }}
     >
       {props.children}
