@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
-import { Input } from "../components/Input";
-import { Label } from "../components/Label";
 import Navbar from "../components/Navbar";
 import imagePath from "../utils/imagePaths";
-import path from "../utils/paths";
-import { Link } from "react-router";
+import Login from "../components/Login";
+import Signup from "../components/Signup";
 
 const Home = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -51,45 +49,7 @@ const Home = () => {
             animate={{ x: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <h2 className="text-2xl font-semibold text-center mb-6">
-              {isLogin ? "Log In" : "Sign Up"}
-            </h2>
-            <form className="space-y-4">
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                  autoComplete="email"
-                />
-              </div>
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  required
-                  autoComplete="current-password"
-                />
-              </div>
-              {!isLogin && (
-                <div>
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    required
-                  />
-                </div>
-              )}
-              <Button className="w-full" size="lg" asChild>
-                <Link to={path.notes}>{isLogin ? "Log In" : "Sign Up"}</Link>
-              </Button>
-            </form>
+            {isLogin ? <Login /> : <Signup />}
             <div className="mt-4 text-center">
               <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
                 {isLogin
