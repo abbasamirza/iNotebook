@@ -15,15 +15,24 @@ import {
 import { ScrollArea } from "./ScrollArea";
 import { toggleTheme } from "../utils/ui";
 import { Separator } from "./Separator";
-import { Link } from "react-router";
 import path from "../constants/paths";
+import { deleteSession } from "../utils/utils";
+import { useNavigate } from "react-router";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 
 const FolderSidebar = () => {
   const [showToggleSidebarButton, setShowToggleSidebarButton] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const navigate = useNavigate();
+
   const onToggle = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const onLogout = () => {
+    deleteSession();
+    navigate(path.home);
   };
 
   const folders = [
@@ -41,7 +50,7 @@ const FolderSidebar = () => {
   return (
     <div
       className={`bg-background border-r flex flex-col relative transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-12" : "w-64"
+        isCollapsed ? "w-6" : "w-64"
       }`}
       onMouseEnter={() => setShowToggleSidebarButton(true)}
       onMouseLeave={() => setShowToggleSidebarButton(false)}
@@ -50,7 +59,7 @@ const FolderSidebar = () => {
         variant="ghost"
         size="icon"
         className={`absolute top-[68px] hover:bg-transparent -right-4 transform -translate-y-1/2 z-10 transition-opacity duration-300 ${
-          showToggleSidebarButton ? "opacity-100" : "opacity-0"
+          showToggleSidebarButton || isCollapsed ? "opacity-100" : "opacity-0"
         }`}
         onClick={onToggle}
       >
@@ -62,17 +71,25 @@ const FolderSidebar = () => {
       </Button>
       <div className={`p-4 space-y-2 ${isCollapsed ? "hidden" : ""}`}>
         <div className="flex justify-between items-center">
-          <Button variant="ghost" size="icon" asChild>
-            <Link to={path.home}>
-              <LogOut className="h-4 w-4" />
-              <span className="sr-only">Logout</span>
-            </Link>
-          </Button>
-          <Button variant="ghost" size="icon" onClick={toggleTheme}>
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button variant="ghost" size="icon" onClick={onLogout}>
+                <LogOut className="h-4 w-4" />
+                <span className="sr-only">Logout</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Logout</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Toggle theme</TooltipContent>
+          </Tooltip>
         </div>
       </div>
       <Separator className={isCollapsed ? "hidden" : ""} />

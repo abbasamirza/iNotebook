@@ -7,19 +7,22 @@ import path from "./constants/paths";
 import Notes from "./pages/Notes";
 import { Provider } from "react-redux";
 import { store } from "./libs/redux/store";
+import { TooltipProvider } from "./components/Tooltip";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CheckThemePreference />
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path={path.notes} element={<Notes />} />
-        </Routes>
-      </BrowserRouter>
+      <TooltipProvider delayDuration={100}>
+        <CheckThemePreference />
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path={path.notes} element={<Notes />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
     </Provider>
   </React.StrictMode>
 );
