@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
 import Navbar from "../components/Navbar";
@@ -6,10 +6,20 @@ import imagePath from "../constants/imagePaths";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import useAlert from "../hooks/useAlert";
+import { isUserLoggedIn } from "../utils/utils";
+import { useNavigate } from "react-router";
+import path from "../constants/paths";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const { hideAlert } = useAlert();
+
+  useEffect(() => {
+    isUserLoggedIn() && navigate(path.notes);
+
+    hideAlert();
+  }, [hideAlert, navigate]);
 
   return (
     <>

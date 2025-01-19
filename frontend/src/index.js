@@ -3,11 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "./pages/Home";
-import path from "./constants/paths";
-import Notes from "./pages/Notes";
 import { Provider } from "react-redux";
 import { store } from "./libs/redux/store";
 import { TooltipProvider } from "./components/Tooltip";
+import protectedPaths from "./constants/protectedPaths";
+import ProtectedPaths from "./components/ProtectedPaths";
+import NotFound from "./pages/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,7 +20,14 @@ root.render(
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
-            <Route path={path.notes} element={<Notes />} />
+            {protectedPaths.map(({ path, element }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<ProtectedPaths element={element} />}
+              />
+            ))}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

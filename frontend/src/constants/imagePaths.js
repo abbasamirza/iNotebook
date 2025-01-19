@@ -3,6 +3,7 @@ const imagePath = {
   backgrounds: {
     note: "/notes-background.svg",
   },
+  noData: "/no-data.svg",
 };
 
 export default imagePath;

@@ -75,3 +75,7 @@ export const deleteSession = () => {
 export const unsuccessfulAPIResult = (result) => {
   return !result || result.status !== apiResponse.success;
 };
+
+export const isUserLoggedIn = () => {
+  return !!getToken();
+};
