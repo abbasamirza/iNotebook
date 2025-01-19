@@ -1,18 +1,23 @@
+require("dotenv").config();
 const connectToMongo = require("./db");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config({ path: "./backend/.env" });
+const fs = require("fs");
+const path = require("path");
 
-connectToMongo();
+connectToMongo().catch(console.dir);
 
 const app = express();
-const port = 8000;
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/notes", require("./routes/notes"));
 
-app.listen(port, () => {
-  console.log(`iNotebook backend listening on http://localhost:${port}`);
+// Dynamically include routes from routes folder in the format /api/<file_name>/<route>
+const routesPath = path.join(__dirname, "routes");
+fs.readdirSync(routesPath).forEach((file) => {
+  if (file.endsWith(".js")) {
+    const routeName = file.replace(".js", "");
+    const route = require(`./routes/${file}`);
+    app.use(`/api/${routeName}`, route);
+  }
 });

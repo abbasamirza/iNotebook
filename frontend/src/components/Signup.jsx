@@ -15,6 +15,7 @@ import {
 
 const signupSchema = z
   .object({
+    name: z.string().min(1, "Name is required"),
     email: z
       .string()
       .min(1, "Email is required")
@@ -40,6 +41,7 @@ const Signup = () => {
   const form = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -55,6 +57,23 @@ const Signup = () => {
       <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel required>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your name"
+                    autoComplete="name"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
