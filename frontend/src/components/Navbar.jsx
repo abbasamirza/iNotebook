@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import { Moon, Sun } from "lucide-react";
 import { toggleTheme } from "../utils/ui";
-import imagePath from "../utils/imagePaths";
+import imagePath from "../constants/imagePaths";
 
 const Navbar = () => {
   return (

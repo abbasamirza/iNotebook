@@ -5,7 +5,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 
-connectToMongo().catch(console.dir);
+connectToMongo();
 
 const app = express();
 

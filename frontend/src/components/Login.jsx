@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,14 @@ import {
   FormLabel,
   FormMessage,
 } from "./Form";
+import ApiHandler from "../classes/ApiHandler";
+import apiRoute from "../constants/apiRoutes";
+import useAlert from "../hooks/useAlert";
+import AlertWrapper, { errorAlert, successAlert } from "./Alert";
+import { createSession, unsuccessfulAPIResult } from "../utils/utils";
+import { LoaderCircle } from "lucide-react";
+import { useNavigate } from "react-router";
+import path from "../constants/paths";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -30,8 +38,28 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log("data", data);
+  const { showAlert } = useAlert();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    const result = await ApiHandler.fetch({
+      route: apiRoute.login,
+      params: data,
+    });
+
+    if (unsuccessfulAPIResult(result)) {
+      showAlert(errorAlert({ description: result.error }));
+    } else {
+      showAlert(successAlert({ description: "Logged in successfully" }));
+      createSession(result.data.user, result.data.authToken);
+      navigate(path.notes);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -75,8 +103,9 @@ const Login = () => {
               </FormItem>
             )}
           />
-          <Button className="w-full" size="lg" type="submit">
-            Log In
+          <AlertWrapper />
+          <Button className="w-full" size="lg" type="submit" disabled={loading}>
+            {loading ? <LoaderCircle className="animate-spin" /> : "Log In"}
           </Button>
         </form>
       </Form>

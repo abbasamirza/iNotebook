@@ -2,6 +2,8 @@ const { validationResult } = require("express-validator");
 const User = require("../models/User");
 const { responseMessage } = require("../utils/responseMessages");
 const { JWT_SECRET } = require("../config");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const signup = async (req, res) => {
   // If any data is invalid, return bad request

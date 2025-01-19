@@ -16,7 +16,7 @@ import { ScrollArea } from "./ScrollArea";
 import { toggleTheme } from "../utils/ui";
 import { Separator } from "./Separator";
 import { Link } from "react-router";
-import path from "../utils/paths";
+import path from "../constants/paths";
 
 const FolderSidebar = () => {
   const [showToggleSidebarButton, setShowToggleSidebarButton] = useState(false);

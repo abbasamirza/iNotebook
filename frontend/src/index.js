@@ -3,20 +3,24 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "./pages/Home";
-import path from "./utils/paths";
+import path from "./constants/paths";
 import Notes from "./pages/Notes";
+import { Provider } from "react-redux";
+import { store } from "./libs/redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <CheckThemePreference />
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path={path.notes} element={<Notes />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <CheckThemePreference />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path={path.notes} element={<Notes />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
