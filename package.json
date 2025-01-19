@@ -5,7 +5,8 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npx nodemon index.js",
     "client": "cd frontend && npm start",
-    "build": "cd frontend && npm run build"
+    "build": "cd frontend && npm run build",
+    "build:server": "npm install && cd backend && npm install"
   },
   "dependencies": {
     "concurrently": "^7.6.0"
