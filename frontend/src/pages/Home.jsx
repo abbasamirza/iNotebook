@@ -17,9 +17,12 @@ const Home = () => {
 
   useEffect(() => {
     isUserLoggedIn() && navigate(path.notes);
+  }, [navigate]);
 
+  useEffect(() => {
     hideAlert();
-  }, [hideAlert, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
