@@ -17,7 +17,7 @@ import apiRoute from "../constants/apiRoutes";
 import { createSession, unsuccessfulAPIResult } from "../utils/utils";
 import useAlert from "../hooks/useAlert";
 import AlertWrapper, { errorAlert, successAlert } from "./Alert";
-import { LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { useNavigate } from "react-router";
 import path from "../constants/paths";
 
@@ -60,6 +60,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -78,6 +79,10 @@ const Signup = () => {
     }
 
     setLoading(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -127,12 +132,27 @@ const Signup = () => {
               <FormItem>
                 <FormLabel required>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your password"
-                    type="password"
-                    autoComplete="current-password"
-                    {...field}
-                  />
+                  <div className="relative">
+                    <Input
+                      placeholder="Enter your password"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="current-password"
+                      {...field}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,11 +165,27 @@ const Signup = () => {
               <FormItem>
                 <FormLabel required>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Confirm your password"
-                    type="password"
-                    {...field}
-                  />
+                  <div className="relative">
+                    <Input
+                      placeholder="Confirm your password"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="new-password"
+                      {...field}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
